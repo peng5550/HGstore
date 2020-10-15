@@ -1,0 +1,642 @@
+[
+  {
+    'RESP_PARAM': {
+      'BUSI_INFO': {
+        'CHECKRSLTLIST': {
+          'CHECKRSLTINFO': {
+            'USER_INFO': {
+              'BILL_ID': 13646574296,
+              'ROLE_ID': ''
+            },
+            'SUCCESSLIST': {
+              'SUCCESSINFO': [
+                {
+                  'MESSAGE': 0,
+                  'RULE_CODE': 'Check_ProductConstruct_1',
+                  'CODE': 0,
+                  'RULE_NAME': '产品构成校验规则',
+                  'OFFER_ID': ''
+                },
+                {
+                  'MESSAGE': 0,
+                  'RULE_CODE': 'Check_InsOfferPlan_State_UnLock',
+                  'CODE': 0,
+                  'RULE_NAME': '用户主策划未锁定校验',
+                  'OFFER_ID': ''
+                },
+                {
+                  'MESSAGE': 0,
+                  'RULE_CODE': 'Check_User_SpecIsGsmOrFixOrWLW',
+                  'CODE': 0,
+                  'RULE_NAME': 'GSM用户或固话用户或物联网校验',
+                  'OFFER_ID': ''
+                },
+                {
+                  'MESSAGE': 0,
+                  'RULE_CODE': 'Check_User_NonTransitionUser_NextMonth',
+                  'CODE': 0,
+                  'RULE_NAME': '非下周期生效的携号转地市用户校验',
+                  'OFFER_ID': ''
+                },
+                {
+                  'MESSAGE': 0,
+                  'RULE_CODE': 'Check_UserBillId_Exists',
+                  'CODE': 0,
+                  'RULE_NAME': '用户在系统中实例存在性校验',
+                  'OFFER_ID': ''
+                },
+                {
+                  'MESSAGE': 0,
+                  'RULE_CODE': 'Check_Is_On_Line_Temp_Num_User',
+                  'CODE': 0,
+                  'RULE_NAME': '是否是线上放号临时号码校验',
+                  'OFFER_ID': ''
+                },
+                {
+                  'MESSAGE': 0,
+                  'RULE_CODE': 'Check_User_NonChgOfferBeforeChgCust',
+                  'CODE': 0,
+                  'RULE_NAME': '取消下周期前没有过户操作',
+                  'OFFER_ID': ''
+                },
+                {
+                  'MESSAGE': 0,
+                  'RULE_CODE': 'Check_User_IsOutNet_For_FixNet',
+                  'CODE': 0,
+                  'RULE_NAME': '用户为非携转或已携入状态校验',
+                  'OFFER_ID': ''
+                },
+                {
+                  'MESSAGE': 0,
+                  'RULE_CODE': 'Check_OfferPrepay_UserRole_1',
+                  'CODE': 0,
+                  'RULE_NAME': '预缴与用户角色关系校验',
+                  'OFFER_ID': 600000655085
+                },
+                {
+                  'MESSAGE': 0,
+                  'RULE_CODE': 'Check_Offer_Is_OnLineTempNumKh',
+                  'CODE': 0,
+                  'RULE_NAME': '开户校验是否是线上放号临时号码校验',
+                  'OFFER_ID': 600000655085
+                },
+                {
+                  'MESSAGE': 0,
+                  'RULE_CODE': 'Check_ProductPreLimit_1',
+                  'CODE': 0,
+                  'RULE_NAME': '前项限制校验规则',
+                  'OFFER_ID': 600000655085
+                },
+                {
+                  'MESSAGE': 0,
+                  'RULE_CODE': 'Check_ProductAfterLimit_1',
+                  'CODE': 0,
+                  'RULE_NAME': '后项限制校验规则',
+                  'OFFER_ID': ''
+                },
+                {
+                  'MESSAGE': 0,
+                  'RULE_CODE': 'Check_ProductMutexDepend_1',
+                  'CODE': 0,
+                  'RULE_NAME': '产品互斥依赖校验规则',
+                  'OFFER_ID': ''
+                }
+              ]
+            },
+            'APPOINTMENT_LIST': {
+              'APPOINTMENT_INFO': {
+                'OFFER_ID': 600000655085,
+                'FLAG': 'Y'
+              }
+            }
+          }
+        }
+      },
+      'PUB_INFO': {
+        'RETURN_RESULT': 0,
+        'OSB_SERIAL_NO': 'b-app-q23-srv05^16013812300000000011',
+        'RETURN_DESC': '规则校验通过！'
+      }
+    }
+  },
+  {
+    'RESP_PARAM': {
+      'BUSI_INFO': {
+        'APPOINT_METUX_LIST': {
+          'APPOINT_METUX_INFO': [
+            {
+              'APP_MUTEX_DEPEND_TYPE': 'MUTEX',
+              'OFFER_ID': 600000505803,
+              'APP_OFFER_ID': 600000655085
+            },
+            {
+              'APP_MUTEX_DEPEND_TYPE': 'MUTEX',
+              'OFFER_ID': 600000655527,
+              'APP_OFFER_ID': 600000655085
+            }
+          ]
+        },
+        'FREE_SOURCE_LIST': '',
+        'OFFER_LIST': {
+          'OFFER_INFO': {
+            'OFFER_EXP_TIME': 20211101000000,
+            'REVISABLE': 'N',
+            'OFFER_NAME': '惠购消费抵扣合约享180元消费抵扣(月承诺消费58元,1年)',
+            'ERR_LIST': {
+              'ERR_INFO': {
+                'ERROR_MESSAGE': '策划[2020版5G手机信用购机合约_直连版_238档]和策划[惠购消费抵扣合约享180元消费抵扣(月承诺消费58元,1年)]不能同时存在！！！',
+                'OFFER_ID': 600000655527,
+                'OFFER_INST_ID': 63004511350603,
+                'MUTEX_DEPEND_TYPE': 'MUTEX'
+              }
+            },
+            'OFFER_OPER_TYPE': 1,
+            'OFFER_EFF_TIME': 20201101000000,
+            'MAX_PRE_MONTH': 6,
+            'OFFER_ID': 600000655085,
+            'PRODUCT_LIST': '',
+            'MONTH_BETWEEN': 12,
+            'OFFER_TYPE': 'OFFER_VAS_PREPAY'
+          }
+        }
+      },
+      'PUB_INFO': {
+        'RETURN_RESULT': 0,
+        'OSB_SERIAL_NO': 'b-app-q49-srv02^16013812300000000004',
+        'RETURN_DESC': '操作成功'
+      }
+    }
+  }
+]
+[
+  {
+    'RESP_PARAM': {
+      'BUSI_INFO': {
+        'CHECKRSLTLIST': {
+          'CHECKRSLTINFO': {
+            'USER_INFO': {
+              'BILL_ID': 13967793251,
+              'ROLE_ID': ''
+            },
+            'SUCCESSLIST': {
+              'SUCCESSINFO': [
+                {
+                  'MESSAGE': 0,
+                  'RULE_CODE': 'Check_ProductConstruct_1',
+                  'CODE': 0,
+                  'RULE_NAME': '产品构成校验规则',
+                  'OFFER_ID': ''
+                },
+                {
+                  'MESSAGE': 0,
+                  'RULE_CODE': 'Check_InsOfferPlan_State_UnLock',
+                  'CODE': 0,
+                  'RULE_NAME': '用户主策划未锁定校验',
+                  'OFFER_ID': ''
+                },
+                {
+                  'MESSAGE': 0,
+                  'RULE_CODE': 'Check_User_SpecIsGsmOrFixOrWLW',
+                  'CODE': 0,
+                  'RULE_NAME': 'GSM用户或固话用户或物联网校验',
+                  'OFFER_ID': ''
+                },
+                {
+                  'MESSAGE': 0,
+                  'RULE_CODE': 'Check_User_NonTransitionUser_NextMonth',
+                  'CODE': 0,
+                  'RULE_NAME': '非下周期生效的携号转地市用户校验',
+                  'OFFER_ID': ''
+                },
+                {
+                  'MESSAGE': 0,
+                  'RULE_CODE': 'Check_UserBillId_Exists',
+                  'CODE': 0,
+                  'RULE_NAME': '用户在系统中实例存在性校验',
+                  'OFFER_ID': ''
+                },
+                {
+                  'MESSAGE': 0,
+                  'RULE_CODE': 'Check_Is_On_Line_Temp_Num_User',
+                  'CODE': 0,
+                  'RULE_NAME': '是否是线上放号临时号码校验',
+                  'OFFER_ID': ''
+                },
+                {
+                  'MESSAGE': 0,
+                  'RULE_CODE': 'Check_User_NonChgOfferBeforeChgCust',
+                  'CODE': 0,
+                  'RULE_NAME': '取消下周期前没有过户操作',
+                  'OFFER_ID': ''
+                },
+                {
+                  'MESSAGE': 0,
+                  'RULE_CODE': 'Check_User_IsOutNet_For_FixNet',
+                  'CODE': 0,
+                  'RULE_NAME': '用户为非携转或已携入状态校验',
+                  'OFFER_ID': ''
+                },
+                {
+                  'MESSAGE': 0,
+                  'RULE_CODE': 'Check_OfferPrepay_UserRole_1',
+                  'CODE': 0,
+                  'RULE_NAME': '预缴与用户角色关系校验',
+                  'OFFER_ID': 600000655085
+                },
+                {
+                  'MESSAGE': 0,
+                  'RULE_CODE': 'Check_Offer_Is_OnLineTempNumKh',
+                  'CODE': 0,
+                  'RULE_NAME': '开户校验是否是线上放号临时号码校验',
+                  'OFFER_ID': 600000655085
+                },
+                {
+                  'MESSAGE': 0,
+                  'RULE_CODE': 'Check_ProductPreLimit_1',
+                  'CODE': 0,
+                  'RULE_NAME': '前项限制校验规则',
+                  'OFFER_ID': 600000655085
+                },
+                {
+                  'MESSAGE': 0,
+                  'RULE_CODE': 'Check_ProductAfterLimit_1',
+                  'CODE': 0,
+                  'RULE_NAME': '后项限制校验规则',
+                  'OFFER_ID': ''
+                },
+                {
+                  'MESSAGE': 0,
+                  'RULE_CODE': 'Check_ProductMutexDepend_1',
+                  'CODE': 0,
+                  'RULE_NAME': '产品互斥依赖校验规则',
+                  'OFFER_ID': ''
+                }
+              ]
+            },
+            'APPOINTMENT_LIST': {
+              'APPOINTMENT_INFO': {
+                'OFFER_ID': 600000655085,
+                'FLAG': 'Y'
+              }
+            }
+          }
+        }
+      },
+      'PUB_INFO': {
+        'RETURN_RESULT': 0,
+        'OSB_SERIAL_NO': 'b-app-q19-srv07^16013812840000000017',
+        'RETURN_DESC': '规则校验通过！'
+      }
+    }
+  },
+  {
+    'RESP_PARAM': {
+      'BUSI_INFO': {
+        'FREE_SOURCE_LIST': '',
+        'OFFER_LIST': {
+          'OFFER_INFO': {
+            'OFFER_EXP_TIME': 20211001000000,
+            'REVISABLE': 'Y',
+            'OFFER_NAME': '惠购消费抵扣合约享180元消费抵扣(月承诺消费58元,1年)',
+            'ERR_LIST': {
+              'ERR_INFO': ''
+            },
+            'OFFER_OPER_TYPE': 1,
+            'OFFER_EFF_TIME': 20201015004853,
+            'MAX_PRE_MONTH': 6,
+            'OFFER_ID': 600000655085,
+            'PRODUCT_LIST': '',
+            'MONTH_BETWEEN': 11,
+            'OFFER_TYPE': 'OFFER_VAS_PREPAY'
+          }
+        }
+      },
+      'PUB_INFO': {
+        'RETURN_RESULT': 0,
+        'OSB_SERIAL_NO': 'b-app-q23-srv03^16013812850000000002',
+        'RETURN_DESC': '操作成功'
+      }
+    }
+  }
+]
+[
+  {
+    'RESP_PARAM': {
+      'BUSI_INFO': {
+        'CHECKRSLTLIST': {
+          'CHECKRSLTINFO': {
+            'USER_INFO': {
+              'BILL_ID': 13646574296,
+              'ROLE_ID': ''
+            },
+            'SUCCESSLIST': {
+              'SUCCESSINFO': [
+                {
+                  'MESSAGE': 0,
+                  'RULE_CODE': 'Check_ProductConstruct_1',
+                  'CODE': 0,
+                  'RULE_NAME': '产品构成校验规则',
+                  'OFFER_ID': ''
+                },
+                {
+                  'MESSAGE': 0,
+                  'RULE_CODE': 'Check_InsOfferPlan_State_UnLock',
+                  'CODE': 0,
+                  'RULE_NAME': '用户主策划未锁定校验',
+                  'OFFER_ID': ''
+                },
+                {
+                  'MESSAGE': 0,
+                  'RULE_CODE': 'Check_User_SpecIsGsmOrFixOrWLW',
+                  'CODE': 0,
+                  'RULE_NAME': 'GSM用户或固话用户或物联网校验',
+                  'OFFER_ID': ''
+                },
+                {
+                  'MESSAGE': 0,
+                  'RULE_CODE': 'Check_User_NonTransitionUser_NextMonth',
+                  'CODE': 0,
+                  'RULE_NAME': '非下周期生效的携号转地市用户校验',
+                  'OFFER_ID': ''
+                },
+                {
+                  'MESSAGE': 0,
+                  'RULE_CODE': 'Check_UserBillId_Exists',
+                  'CODE': 0,
+                  'RULE_NAME': '用户在系统中实例存在性校验',
+                  'OFFER_ID': ''
+                },
+                {
+                  'MESSAGE': 0,
+                  'RULE_CODE': 'Check_Is_On_Line_Temp_Num_User',
+                  'CODE': 0,
+                  'RULE_NAME': '是否是线上放号临时号码校验',
+                  'OFFER_ID': ''
+                },
+                {
+                  'MESSAGE': 0,
+                  'RULE_CODE': 'Check_User_NonChgOfferBeforeChgCust',
+                  'CODE': 0,
+                  'RULE_NAME': '取消下周期前没有过户操作',
+                  'OFFER_ID': ''
+                },
+                {
+                  'MESSAGE': 0,
+                  'RULE_CODE': 'Check_User_IsOutNet_For_FixNet',
+                  'CODE': 0,
+                  'RULE_NAME': '用户为非携转或已携入状态校验',
+                  'OFFER_ID': ''
+                },
+                {
+                  'MESSAGE': 0,
+                  'RULE_CODE': 'Check_OfferPrepay_UserRole_1',
+                  'CODE': 0,
+                  'RULE_NAME': '预缴与用户角色关系校验',
+                  'OFFER_ID': 600000655085
+                },
+                {
+                  'MESSAGE': 0,
+                  'RULE_CODE': 'Check_Offer_Is_OnLineTempNumKh',
+                  'CODE': 0,
+                  'RULE_NAME': '开户校验是否是线上放号临时号码校验',
+                  'OFFER_ID': 600000655085
+                },
+                {
+                  'MESSAGE': 0,
+                  'RULE_CODE': 'Check_ProductPreLimit_1',
+                  'CODE': 0,
+                  'RULE_NAME': '前项限制校验规则',
+                  'OFFER_ID': 600000655085
+                },
+                {
+                  'MESSAGE': 0,
+                  'RULE_CODE': 'Check_ProductAfterLimit_1',
+                  'CODE': 0,
+                  'RULE_NAME': '后项限制校验规则',
+                  'OFFER_ID': ''
+                },
+                {
+                  'MESSAGE': 0,
+                  'RULE_CODE': 'Check_ProductMutexDepend_1',
+                  'CODE': 0,
+                  'RULE_NAME': '产品互斥依赖校验规则',
+                  'OFFER_ID': ''
+                }
+              ]
+            },
+            'APPOINTMENT_LIST': {
+              'APPOINTMENT_INFO': {
+                'OFFER_ID': 600000655085,
+                'FLAG': 'Y'
+              }
+            }
+          }
+        }
+      },
+      'PUB_INFO': {
+        'RETURN_RESULT': 0,
+        'OSB_SERIAL_NO': 'b-app-q19-srv04^16013812850000000006',
+        'RETURN_DESC': '规则校验通过！'
+      }
+    }
+  },
+  {
+    'RESP_PARAM': {
+      'BUSI_INFO': {
+        'APPOINT_METUX_LIST': {
+          'APPOINT_METUX_INFO': [
+            {
+              'APP_MUTEX_DEPEND_TYPE': 'MUTEX',
+              'OFFER_ID': 600000505803,
+              'APP_OFFER_ID': 600000655085
+            },
+            {
+              'APP_MUTEX_DEPEND_TYPE': 'MUTEX',
+              'OFFER_ID': 600000655527,
+              'APP_OFFER_ID': 600000655085
+            }
+          ]
+        },
+        'FREE_SOURCE_LIST': '',
+        'OFFER_LIST': {
+          'OFFER_INFO': {
+            'OFFER_EXP_TIME': 20211101000000,
+            'REVISABLE': 'N',
+            'OFFER_NAME': '惠购消费抵扣合约享180元消费抵扣(月承诺消费58元,1年)',
+            'ERR_LIST': {
+              'ERR_INFO': {
+                'ERROR_MESSAGE': '策划[2020版5G手机信用购机合约_直连版_238档]和策划[惠购消费抵扣合约享180元消费抵扣(月承诺消费58元,1年)]不能同时存在！！！',
+                'OFFER_ID': 600000655527,
+                'OFFER_INST_ID': 63004511350603,
+                'MUTEX_DEPEND_TYPE': 'MUTEX'
+              }
+            },
+            'OFFER_OPER_TYPE': 1,
+            'OFFER_EFF_TIME': 20201101000000,
+            'MAX_PRE_MONTH': 6,
+            'OFFER_ID': 600000655085,
+            'PRODUCT_LIST': '',
+            'MONTH_BETWEEN': 12,
+            'OFFER_TYPE': 'OFFER_VAS_PREPAY'
+          }
+        }
+      },
+      'PUB_INFO': {
+        'RETURN_RESULT': 0,
+        'OSB_SERIAL_NO': 'b-app-q49-srv04^16013812850000000002',
+        'RETURN_DESC': '操作成功'
+      }
+    }
+  }
+]
+[
+  {
+    'RESP_PARAM': {
+      'BUSI_INFO': {
+        'CHECKRSLTLIST': {
+          'CHECKRSLTINFO': {
+            'USER_INFO': {
+              'BILL_ID': 13968737129,
+              'ROLE_ID': ''
+            },
+            'SUCCESSLIST': {
+              'SUCCESSINFO': [
+                {
+                  'MESSAGE': 0,
+                  'RULE_CODE': 'Check_ProductConstruct_1',
+                  'CODE': 0,
+                  'RULE_NAME': '产品构成校验规则',
+                  'OFFER_ID': ''
+                },
+                {
+                  'MESSAGE': 0,
+                  'RULE_CODE': 'Check_InsOfferPlan_State_UnLock',
+                  'CODE': 0,
+                  'RULE_NAME': '用户主策划未锁定校验',
+                  'OFFER_ID': ''
+                },
+                {
+                  'MESSAGE': 0,
+                  'RULE_CODE': 'Check_User_SpecIsGsmOrFixOrWLW',
+                  'CODE': 0,
+                  'RULE_NAME': 'GSM用户或固话用户或物联网校验',
+                  'OFFER_ID': ''
+                },
+                {
+                  'MESSAGE': 0,
+                  'RULE_CODE': 'Check_User_NonTransitionUser_NextMonth',
+                  'CODE': 0,
+                  'RULE_NAME': '非下周期生效的携号转地市用户校验',
+                  'OFFER_ID': ''
+                },
+                {
+                  'MESSAGE': 0,
+                  'RULE_CODE': 'Check_UserBillId_Exists',
+                  'CODE': 0,
+                  'RULE_NAME': '用户在系统中实例存在性校验',
+                  'OFFER_ID': ''
+                },
+                {
+                  'MESSAGE': 0,
+                  'RULE_CODE': 'Check_Is_On_Line_Temp_Num_User',
+                  'CODE': 0,
+                  'RULE_NAME': '是否是线上放号临时号码校验',
+                  'OFFER_ID': ''
+                },
+                {
+                  'MESSAGE': 0,
+                  'RULE_CODE': 'Check_User_NonChgOfferBeforeChgCust',
+                  'CODE': 0,
+                  'RULE_NAME': '取消下周期前没有过户操作',
+                  'OFFER_ID': ''
+                },
+                {
+                  'MESSAGE': 0,
+                  'RULE_CODE': 'Check_User_IsOutNet_For_FixNet',
+                  'CODE': 0,
+                  'RULE_NAME': '用户为非携转或已携入状态校验',
+                  'OFFER_ID': ''
+                },
+                {
+                  'MESSAGE': 0,
+                  'RULE_CODE': 'Check_OfferPrepay_UserRole_1',
+                  'CODE': 0,
+                  'RULE_NAME': '预缴与用户角色关系校验',
+                  'OFFER_ID': 600000655085
+                },
+                {
+                  'MESSAGE': 0,
+                  'RULE_CODE': 'Check_Offer_Is_OnLineTempNumKh',
+                  'CODE': 0,
+                  'RULE_NAME': '开户校验是否是线上放号临时号码校验',
+                  'OFFER_ID': 600000655085
+                },
+                {
+                  'MESSAGE': 0,
+                  'RULE_CODE': 'Check_ProductPreLimit_1',
+                  'CODE': 0,
+                  'RULE_NAME': '前项限制校验规则',
+                  'OFFER_ID': 600000655085
+                },
+                {
+                  'MESSAGE': 0,
+                  'RULE_CODE': 'Check_ProductAfterLimit_1',
+                  'CODE': 0,
+                  'RULE_NAME': '后项限制校验规则',
+                  'OFFER_ID': ''
+                },
+                {
+                  'MESSAGE': 0,
+                  'RULE_CODE': 'Check_ProductMutexDepend_1',
+                  'CODE': 0,
+                  'RULE_NAME': '产品互斥依赖校验规则',
+                  'OFFER_ID': ''
+                }
+              ]
+            },
+            'APPOINTMENT_LIST': {
+              'APPOINTMENT_INFO': {
+                'OFFER_ID': 600000655085,
+                'FLAG': 'Y'
+              }
+            }
+          }
+        }
+      },
+      'PUB_INFO': {
+        'RETURN_RESULT': 0,
+        'OSB_SERIAL_NO': 'b-app-q49-srv07^16013812840000000010',
+        'RETURN_DESC': '规则校验通过！'
+      }
+    }
+  },
+  {
+    'RESP_PARAM': {
+      'BUSI_INFO': {
+        'FREE_SOURCE_LIST': '',
+        'OFFER_LIST': {
+          'OFFER_INFO': {
+            'OFFER_EXP_TIME': 20211001000000,
+            'REVISABLE': 'Y',
+            'OFFER_NAME': '惠购消费抵扣合约享180元消费抵扣(月承诺消费58元,1年)',
+            'ERR_LIST': {
+              'ERR_INFO': ''
+            },
+            'OFFER_OPER_TYPE': 1,
+            'OFFER_EFF_TIME': 20201015004853,
+            'MAX_PRE_MONTH': 6,
+            'OFFER_ID': 600000655085,
+            'PRODUCT_LIST': '',
+            'MONTH_BETWEEN': 11,
+            'OFFER_TYPE': 'OFFER_VAS_PREPAY'
+          }
+        }
+      },
+      'PUB_INFO': {
+        'RETURN_RESULT': 0,
+        'OSB_SERIAL_NO': 'b-app-q48-srv02^16013812840000000005',
+        'RETURN_DESC': '操作成功'
+      }
+    }
+  }
+]

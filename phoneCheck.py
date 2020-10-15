@@ -128,6 +128,9 @@ class Application(object):
             'Accept-Encoding': 'gzip, deflate, br'
         }
 
+        # formData = {"bill_id": phoneNo, "program_id": "600000661055", "kind_id": "600000661056",
+        #             "orgId": shopId, "offerInfoParamList": [
+        #         {"offer_id": "600000655085", "offer_type": "OFFER_VAS_PREPAY", "offer_oper_type": 1}]}
         formData = {"bill_id": phoneNo, "program_id": "600000661055", "kind_id": "600000661056",
                     "orgId": shopId, "opId": opId, "offerInfoParamList": [
                 {"offer_id": "600000655085", "offer_type": "OFFER_VAS_PREPAY", "offer_oper_type": 1}]}
@@ -141,7 +144,7 @@ class Application(object):
                         content = await resp.json()
                         print(content)
                         await asyncio.sleep(self.sleepTime)
-                        return content[0]
+                        return content[-1]
                 except:
                     return
 
@@ -149,10 +152,12 @@ class Application(object):
 
         try:
             content = await self.__getContent(semaphore, phoneNo, shopId, opId)
+            print(phoneNo, content.get("RESP_PARAM").get("BUSI_INFO").get("OFFER_LIST").get("OFFER_INFO").get("REVISABLE"))
             treeData = [
                 self.treeIndex,
                 phoneNo,
-                "是" if content.get("RESP_PARAM").get("PUB_INFO").get("RETURN_RESULT") == 0 else "否",
+                # "是" if content.get("RESP_PARAM").get("PUB_INFO").get("RETURN_RESULT") == 0 else "否",
+                "是" if content.get("RESP_PARAM").get("BUSI_INFO").get("OFFER_LIST").get("OFFER_INFO").get("REVISABLE") == "Y" else "否",
             ]
             self.totalData.append(treeData[1:])
             self.box.insert("", "end", values=treeData)
@@ -198,9 +203,6 @@ class Application(object):
             return
 
         opId = self.workNoText.get().strip()
-        if re.findall("\D+", opId):
-            showerror("错误信息", "请输入正确的工号!")
-            return
 
         if self.totals > 0:
             new_loop = asyncio.new_event_loop()
@@ -244,3 +246,7 @@ class Application(object):
 if __name__ == '__main__':
     app = Application()
     app.run()
+    """
+    店铺ID  10203121
+    工号 20398477
+    """
