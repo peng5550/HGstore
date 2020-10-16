@@ -26,7 +26,7 @@ if sys.platform == "win32":
 
 # "bdist_msi": bdist_msi_options
 setup(name="HGShop10068",
-      version="2.0",
+      version="3.0",
       description="移动惠购用户查询工具",
       options={"build_exe": build_exe_options},
       executables=[Executable("phoneCheck.py",

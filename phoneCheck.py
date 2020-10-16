@@ -54,15 +54,17 @@ class Application(object):
 
         self.showDataBox = mtk.LabelFrame(self.root, text="数据信息", fg="blue")
         self.showDataBox.place(x=50, y=170, width=400, height=400)
-        title = ['1', '2', '3']
+        title = ['1', '2', '3', '4']
         self.box = ttk.Treeview(self.showDataBox, columns=title, show='headings')
         self.box.place(x=20, y=15, width=360, height=340)
         self.box.column('1', width=50, anchor='center')
-        self.box.column('2', width=200, anchor='center')
-        self.box.column('3', width=100, anchor='center')
+        self.box.column('2', width=100, anchor='center')
+        self.box.column('3', width=50, anchor='center')
+        self.box.column('4', width=160, anchor='center')
         self.box.heading('1', text='序号')
         self.box.heading('2', text='手机号')
-        self.box.heading('3', text='是否有优惠')
+        self.box.heading('3', text='优惠')
+        self.box.heading('4', text='ERROR信息')
         self.VScroll1 = Scrollbar(self.box, orient='vertical', command=self.box.yview)
         self.VScroll1.pack(side="right", fill="y")
         self.box.configure(yscrollcommand=self.VScroll1.set)
@@ -193,12 +195,6 @@ class Application(object):
             result.append(result02)
             if "否" in result:
                 result = False
-
-            treeData = [
-                self.treeIndex,
-                phoneNo,
-                "是" if result else "否"
-            ]
             if not result:
                 errorlist00 = []
                 for error in errorList:
@@ -208,7 +204,12 @@ class Application(object):
                 errorText = "\n\n".join(errorlist00)
             else:
                 errorText = ""
-
+            treeData = [
+                self.treeIndex,
+                phoneNo,
+                "是" if result else "否",
+                errorText
+            ]
             self.errordata[str(phoneNo)] = errorText
             self.totalData.append(treeData[1:] + [errorText])
             self.box.insert("", "end", values=treeData)
