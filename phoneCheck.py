@@ -143,14 +143,16 @@ class Application(object):
                     async with await session.post(link, data=json.dumps(formData), timeout=3) as resp:
                         content = await resp.json()
                         await asyncio.sleep(self.sleepTime)
-                        return content[0]
+                        print(content)
+                        return content[-1]
                 except:
                     return
 
     async def __crawler(self, semaphore, phoneNo, shopId, opId):
         try:
             content = await self.__getContent(semaphore, phoneNo, shopId, opId)
-            result = "是" if not content.get("RESP_PARAM").get("BUSI_INFO").get("CHECKRSLTLIST").get("CHECKRSLTINFO").get("ERRORLIST") else "否"
+            # result = "是" if not content.get("RESP_PARAM").get("BUSI_INFO").get("CHECKRSLTLIST").get("CHECKRSLTINFO").get("ERRORLIST") else "否"
+            result = "是" if not content.get("RESP_PARAM").get("BUSI_INFO").get("OFFER_LIST").get("OFFER_INFO").get("ERR_LIST").get("ERR_INFO") else "否"
             treeData = [
                 self.treeIndex,
                 phoneNo,
