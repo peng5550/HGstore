@@ -142,23 +142,25 @@ class Application(object):
                 try:
                     async with await session.post(link, data=json.dumps(formData), timeout=3) as resp:
                         content = await resp.json()
-                        print(content)
                         await asyncio.sleep(self.sleepTime)
-                        return content[-1]
+                        return content
                 except:
                     return
 
     async def __crawler(self, semaphore, phoneNo, shopId, opId):
-
         try:
             content = await self.__getContent(semaphore, phoneNo, shopId, opId)
-            print(phoneNo, content.get("RESP_PARAM").get("BUSI_INFO").get("OFFER_LIST").get("OFFER_INFO").get("REVISABLE"))
+            result = []
+            result01 = "是" if content[-1].get("RESP_PARAM").get("BUSI_INFO").get("OFFER_LIST").get("OFFER_INFO").get("REVISABLE") == "Y" else "否"
+            result02 = "是" if content[0].get("RESP_PARAM").get("PUB_INFO").get("RETURN_RESULT") == "0" else "否"
+
+            result.append(result01)
+            result.append(result02)
             treeData = [
                 self.treeIndex,
                 phoneNo,
-                # "是" if content.get("RESP_PARAM").get("PUB_INFO").get("RETURN_RESULT") == 0 else "否",
-                "是" if content.get("RESP_PARAM").get("BUSI_INFO").get("OFFER_LIST").get("OFFER_INFO").get("REVISABLE") == "Y" else "否",
-            ]
+                "否" if "否" in result else "是"
+               ]
             self.totalData.append(treeData[1:])
             self.box.insert("", "end", values=treeData)
             self.statusNowText.configure(text=f"{self.treeIndex}/{self.totals}")
@@ -166,6 +168,7 @@ class Application(object):
             self.box.yview_moveto(1.0)
             self.excelData.remove(phoneNo)
         except Exception as e:
+            print(e.args)
             pass
 
     def __saveExcel(self):
@@ -225,11 +228,6 @@ class Application(object):
             task.cancel()
             self.loop.stop()
             self.loop.run_forever()
-            # try:
-            #     self.loop.run_until_complete(task)
-            # except asyncio.CancelledError:
-            #     pass
-            # finally:
         self.loop.close()
 
 
