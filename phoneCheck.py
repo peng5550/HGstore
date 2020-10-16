@@ -15,8 +15,9 @@ class Application(object):
         self.semNum = 5
         self.treeIndex = 1
         self.totals = 0
-        self.totalData = [["手机号", "是否有优惠"]]
+        self.totalData = [["手机号", "是否有优惠", "ERROR信息"]]
         self.__createGUI()
+        self.errordata = {}
 
     def __createGUI(self):
         self.root = mtk.Tk()
@@ -65,6 +66,7 @@ class Application(object):
         self.VScroll1 = Scrollbar(self.box, orient='vertical', command=self.box.yview)
         self.VScroll1.pack(side="right", fill="y")
         self.box.configure(yscrollcommand=self.VScroll1.set)
+        self.box.bind(sequence="<Double-Button-1>", func=lambda x: self.thread_it(self.showDetail))
 
         self.btnBox = mtk.LabelFrame(self.root, text="任务栏", fg="blue")
         self.btnBox.place(x=480, y=170, width=170, height=400)
@@ -83,6 +85,17 @@ class Application(object):
         self.btnStart.place(x=15, y=20, width=100, height=30)
         self.btnStop = mtk.Button(self.btnBbox, text="停止", command=lambda: self.thread_it(self.stop))
         self.btnStop.place(x=15, y=70, width=100, height=30)
+
+    def createNewUI(self, phoneNo):
+        detailWin = mtk.Toplevel(self.root)
+        detailWin.title(phoneNo)
+        detailWin.geometry("300x400")
+        errorInfoBox = mtk.LabelFrame(detailWin, text="ERROR信息：", fg="blue")
+        errorInfoBox.place(x=20, y=20, width=250, height=350)
+        errerText = mtk.Text(errorInfoBox)
+        errerText.place(x=10, y=20, width=220, height=300)
+        errerText.insert(mtk.END, "\n" + ''.join(
+            [self.errordata[phoneNo][j] for j in range(len(self.errordata[phoneNo])) if ord(self.errordata[phoneNo][j]) in range(65536)]).strip())
 
     def deleteTree(self):
         x = self.box.get_children()
@@ -105,7 +118,7 @@ class Application(object):
         if excelPath:
             try:
                 self.excelData = []
-                self.totalData = [["手机号", "是否有优惠"]]
+                self.totalData = [["手机号", "是否有优惠", "ERROR信息"]]
                 self.deleteTree()
                 wb = load_workbook(excelPath)
                 ws = wb.active
@@ -143,7 +156,6 @@ class Application(object):
                     async with await session.post(link, data=json.dumps(formData), timeout=3) as resp:
                         content = await resp.json()
                         await asyncio.sleep(self.sleepTime)
-
                         return content
                 except:
                     return
@@ -151,28 +163,54 @@ class Application(object):
     async def __crawler(self, semaphore, phoneNo, shopId, opId):
         try:
             content = await self.__getContent(semaphore, phoneNo, shopId, opId)
+            errorList = []
+            result = []
+            res01 = content[0].get("RESP_PARAM").get("BUSI_INFO").get("CHECKRSLTLIST").get("CHECKRSLTINFO").get("ERRORLIST")
+            if res01:
+                result01 = "否"
+                if type(res01.get("ERRORINFO"))==list:
+                    for li in res01.get("ERRORINFO"):
+                        errorList.append(li.get("MESSAGE"))
+                else:
+                    errorList.append(res01.get("ERRORINFO").get("MESSAGE"))
+            else:
+                result01 = "是"
             try:
-                result = []
-                result01 = "是" if not content[0].get("RESP_PARAM").get("BUSI_INFO").get("CHECKRSLTLIST").get("CHECKRSLTINFO").get("ERRORLIST") else "否"
-                result02 = "是" if not content[-1].get("RESP_PARAM").get("BUSI_INFO").get("OFFER_LIST").get("OFFER_INFO").get("ERR_LIST").get("ERR_INFO") else "否"
+                res2 = content[-1].get("RESP_PARAM").get("BUSI_INFO").get("OFFER_LIST").get("OFFER_INFO").get("ERR_LIST").get("ERR_INFO")
+            except:
+                res2 = {}
 
-                result.append(result01)
-                result.append(result02)
-                print(result)
-                if "否" in result:
-                    result = False
-            except Exception as e:
-                print(e.args)
-                print(content)
+            if res2:
+                if type(res2)==list:
+                    for li in res2:
+                        errorList.append(li.get("ERROR_MESSAGE"))
+                else:
+                    errorList.append(res2.get("ERROR_MESSAGE"))
+                result02 = "否"
+            else:
+                result02 = "是"
+            result.append(result01)
+            result.append(result02)
+            if "否" in result:
                 result = False
-
 
             treeData = [
                 self.treeIndex,
                 phoneNo,
                 "是" if result else "否"
             ]
-            self.totalData.append(treeData[1:])
+            if not result:
+                errorlist00 = []
+                for error in errorList:
+                    error00 = re.sub(r".*?;", "", error)
+                    if error00 not in errorlist00:
+                        errorlist00.append(error00)
+                errorText = "\n\n".join(errorlist00)
+            else:
+                errorText = ""
+
+            self.errordata[str(phoneNo)] = errorText
+            self.totalData.append(treeData[1:] + [errorText])
             self.box.insert("", "end", values=treeData)
             self.statusNowText.configure(text=f"{self.treeIndex}/{self.totals}")
             self.treeIndex += 1
@@ -181,6 +219,12 @@ class Application(object):
         except Exception as e:
             print(e.args)
             pass
+
+    def showDetail(self):
+        for item in self.box.selection():
+            itemText = self.box.item(item, "values")
+            phoneNo = itemText[1]
+            self.createNewUI(phoneNo)
 
     def __saveExcel(self):
         if len(self.totalData) <= 1:
