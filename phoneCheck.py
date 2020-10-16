@@ -8,6 +8,7 @@ import aiohttp
 from openpyxl import Workbook, load_workbook
 import re
 
+
 class Application(object):
 
     def __init__(self):
@@ -135,7 +136,6 @@ class Application(object):
                     "orgId": shopId, "opId": opId, "offerInfoParamList": [
                 {"offer_id": "600000655085", "offer_type": "OFFER_VAS_PREPAY", "offer_oper_type": 1}]}
 
-
         async with semaphore:
             conn = aiohttp.TCPConnector(verify_ssl=False)
             async with aiohttp.ClientSession(connector=conn, headers=headers) as session:
@@ -143,24 +143,19 @@ class Application(object):
                     async with await session.post(link, data=json.dumps(formData), timeout=3) as resp:
                         content = await resp.json()
                         await asyncio.sleep(self.sleepTime)
-                        return content
+                        return content[0]
                 except:
                     return
 
     async def __crawler(self, semaphore, phoneNo, shopId, opId):
         try:
             content = await self.__getContent(semaphore, phoneNo, shopId, opId)
-            result = []
-            result01 = "是" if content[-1].get("RESP_PARAM").get("BUSI_INFO").get("OFFER_LIST").get("OFFER_INFO").get("REVISABLE") == "Y" else "否"
-            result02 = "是" if content[0].get("RESP_PARAM").get("PUB_INFO").get("RETURN_RESULT") == "0" else "否"
-
-            result.append(result01)
-            result.append(result02)
+            result = "是" if not content.get("RESP_PARAM").get("BUSI_INFO").get("CHECKRSLTLIST").get("CHECKRSLTINFO").get("ERRORLIST") else "否"
             treeData = [
                 self.treeIndex,
                 phoneNo,
-                "否" if "否" in result else "是"
-               ]
+                result
+            ]
             self.totalData.append(treeData[1:])
             self.box.insert("", "end", values=treeData)
             self.statusNowText.configure(text=f"{self.treeIndex}/{self.totals}")
@@ -222,14 +217,12 @@ class Application(object):
 
         showinfo("提示信息", "任务结束！")
 
-
     def stop(self):
         for task in asyncio.Task.all_tasks(self.loop):
             task.cancel()
             self.loop.stop()
             self.loop.run_forever()
         self.loop.close()
-
 
     @staticmethod
     def thread_it(func, *args):
