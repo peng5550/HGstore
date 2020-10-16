@@ -143,20 +143,34 @@ class Application(object):
                     async with await session.post(link, data=json.dumps(formData), timeout=3) as resp:
                         content = await resp.json()
                         await asyncio.sleep(self.sleepTime)
-                        print(content)
-                        return content[-1]
+
+                        return content
                 except:
                     return
 
     async def __crawler(self, semaphore, phoneNo, shopId, opId):
         try:
             content = await self.__getContent(semaphore, phoneNo, shopId, opId)
-            # result = "是" if not content.get("RESP_PARAM").get("BUSI_INFO").get("CHECKRSLTLIST").get("CHECKRSLTINFO").get("ERRORLIST") else "否"
-            result = "是" if not content.get("RESP_PARAM").get("BUSI_INFO").get("OFFER_LIST").get("OFFER_INFO").get("ERR_LIST").get("ERR_INFO") else "否"
+            try:
+                result = []
+                result01 = "是" if not content[0].get("RESP_PARAM").get("BUSI_INFO").get("CHECKRSLTLIST").get("CHECKRSLTINFO").get("ERRORLIST") else "否"
+                result02 = "是" if not content[-1].get("RESP_PARAM").get("BUSI_INFO").get("OFFER_LIST").get("OFFER_INFO").get("ERR_LIST").get("ERR_INFO") else "否"
+
+                result.append(result01)
+                result.append(result02)
+                print(result)
+                if "否" in result:
+                    result = False
+            except Exception as e:
+                print(e.args)
+                print(content)
+                result = False
+
+
             treeData = [
                 self.treeIndex,
                 phoneNo,
-                result
+                "是" if result else "否"
             ]
             self.totalData.append(treeData[1:])
             self.box.insert("", "end", values=treeData)
